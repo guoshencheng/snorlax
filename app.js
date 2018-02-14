@@ -6,23 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
-var { response } = require('express');
-response.makeJson = function(obj, code) {
-  if (obj instanceof Error) {
-    this.json({
-      success: false,
-      code: 500,
-      errDesc: obj.message
-    })
-  } else {
-    this.json({
-      success: true,
-      code: code || 200,
-      data: obj
-    })
-  }
-}
+require('./helper/express-response');
 
 var app = express();
 
@@ -32,7 +16,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', routes);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
