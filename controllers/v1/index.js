@@ -1,5 +1,7 @@
-const post = require('./post');
+var tip = require('./tip')
+var postTag = require('./postTag');
+var post = require('./post');
 
 module.exports = {
-  post
+  tip, postTag, post
 };
