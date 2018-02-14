@@ -8,7 +8,7 @@ const create = async (req, res, next) => {
   tip.tipHtml = marked(tip.tipText)
   try {
     const doc = await db.Tip.create(tip);
-    res.json(doc.toJSON());
+    res.makeJson(doc.toJSON());
   } catch (e) {
     next(e)
   }
@@ -19,7 +19,7 @@ const findById =  async (req, res, next) => {
   try {
     const doc = await db.Tip.findById(id);
     if (doc) {
-      res.json(doc.toJSON())
+      res.makeJson(doc.toJSON())
     } else {
       throw new Error(`id ${id} not find`)
     }
@@ -31,7 +31,7 @@ const findById =  async (req, res, next) => {
 const findAll = async (req, res, next) => {
   try {
     const docs = await db.Tip.findAll();
-    res.json(docs.map(doc => doc.toJSON()));
+    res.makeJson(docs.map(doc => doc.toJSON()));
   } catch (e) {
     next(e)
   }
@@ -47,7 +47,7 @@ const search = async (req, res, next) => {
         }
       }
     })
-    res.json(docs.map(doc => doc.toJSON()));
+    res.makeJson(docs.map(doc => doc.toJSON()));
   } catch (e) {
     next(e)
   }
@@ -61,7 +61,7 @@ const update = async (req, res, next) => {
     var doc = await db.Tip.findById(id);
     doc = await doc.update(body, { fields: ['tipText', 'tipHtml'] })
     if (doc) {
-      res.json(doc.toJSON());
+      res.makeJson(doc.toJSON());
     } else {
       throw new Error(`id ${id} not found`);
     }
@@ -74,7 +74,7 @@ const deleteById = async (req, res, next) => {
   const id = req.params.id;
   try {
     const doc = await db.Tip.destroy({ where: { id } })
-    res.json(doc);
+    res.makeJson(doc);
   } catch (e) {
     next(e)
   }

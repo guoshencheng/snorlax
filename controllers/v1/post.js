@@ -10,7 +10,7 @@ const allOnline =  async (req, res, next) => {
       },
       order: [["created_at", "DESC"]]
     });
-    res.json(posts.map(p => p.toJSON()));
+    res.makeJson(posts.map(p => p.toJSON()));
   } catch (e) {
     next(e)
   }
@@ -20,7 +20,7 @@ const findById = async (req, res, next) => {
   const id = req.params.id;
   try {
     const post = await db.Post.findById(id);
-    res.json(post.toJSON());
+    res.makeJson(post.toJSON());
   } catch (e) {
     next(e)
   }
@@ -29,7 +29,7 @@ const findById = async (req, res, next) => {
 const all = async (req, res, next) => {
   try {
    const posts = await db.Post.all({ order: [["updated_at", "DESC"]]})
-   res.json(posts.map(post => post.toJSON()))
+   res.makeJson(posts.map(post => post.toJSON()))
   } catch (e) {
     next(e)
   }
@@ -38,7 +38,7 @@ const all = async (req, res, next) => {
 const createEmpty = async (req, res, next) => {
   try {
     const post = await db.Post.create();
-    res.json(post.toJSON());
+    res.makeJson(post.toJSON());
   } catch (e) {
     next(e)
   }
@@ -55,7 +55,7 @@ const changeStatus = async (req, res, next) => {
     }
     post.status = status;
     post = await post.save();
-    res.json(post.toJSON());
+    res.makeJson(post.toJSON());
   } catch (e) {
     next(e)
   }
@@ -73,7 +73,7 @@ const update = async (req, res, next) => {
     post.short = short;
     post.status = status;
     post = await post.save();
-    res.json(post.toJSON());
+    res.makeJson(post.toJSON());
   } catch (e) {
     next(e)
   }
@@ -96,7 +96,7 @@ const findByTag = async (req, res, next) => {
     const result = {
       postTag, posts: posts.map(post => post.toJSON())
     }
-    res.json(result);
+    res.makeJson(result);
   } catch (e) {
     next(e);
   }
