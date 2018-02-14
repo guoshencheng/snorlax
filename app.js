@@ -7,8 +7,22 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var { request, response } = require('express');
-// console.log(request, response)
+var { response } = require('express');
+response.makeJson = function(obj, code) {
+  if (obj instanceof Error) {
+    this.json({
+      success: false,
+      code: 500,
+      errDesc: obj.message
+    })
+  } else {
+    this.json({
+      success: true,
+      code: code || 200,
+      data: obj
+    })
+  }
+}
 
 var app = express();
 
