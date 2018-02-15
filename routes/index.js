@@ -6,7 +6,6 @@ var v1 = require('./v1');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  console.log(req.headers)
   res.makeJson('welcome to century\'s world')
 });
 
