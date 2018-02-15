@@ -4,4 +4,13 @@
 
 ### 开发
 
+```bash
+npm start
+```
+
 ### 技术栈
+
+- 使用nodemon作为node的热调试
+- 使用express框架，node环境使用node 8.9.4
+- 使用mysql作为数据库，使用sequelize来使用mysql
+- 使用async/await处理异步事件
