@@ -9,6 +9,15 @@ const checkAccess = (req, res, next) => {
   }
 }
 
+const checkAdminAccesss = (req, res, next) => {
+  if (req.headers.admin_token && req.headers.admin_token == config.accessToken) {
+    next();
+  } else {
+    res.status(401)
+    res.makeJson(new Error(`auth not accessed`), 401)
+  }
+}
+
 module.exports = {
-  checkAccess
+  checkAccess, checkAdminAccesss
 };

@@ -1,20 +1,16 @@
 module.exports = (sequelize, DataTypes) => {
-  var Post = sequelize.define("adminUser", {
+  var AdminUser = sequelize.define("adminUser", {
     id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    leverl: {
+    level: {
       type: DataTypes.INTEGER(11),
       defaultValue: 0,
     },
     username: {
-      type: DataTypes.STRING(200),
-      defaultValue: "",
-    },
-    email: {
       type: DataTypes.STRING(200),
       defaultValue: "",
     },
@@ -25,5 +21,5 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     tableName: 'gsc_admin_user',
   });
-  return Post;
+  return AdminUser;
 };
