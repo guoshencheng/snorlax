@@ -1,7 +1,7 @@
 var config = require('config');
 
 const checkAccess = (req, res, next) => {
-  if (req.headers.access_token && req.headers.access_token == config.accessToken) {
+  if (req.headers['access-token'] && req.headers['access-token'] == config.accessToken) {
     next();
   } else {
     res.status(401)
@@ -10,7 +10,7 @@ const checkAccess = (req, res, next) => {
 }
 
 const checkAdminAccesss = (req, res, next) => {
-  if (req.headers.admin_token && req.headers.admin_token == config.accessToken) {
+  if (req.headers['admin-token'] && req.headers['admin-token'] == config.accessToken) {
     next();
   } else {
     res.status(401)
