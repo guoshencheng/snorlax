@@ -9,6 +9,7 @@
       "NODE_ENV": "production",
       "PORT": "3100"
     },
+    "node_args": ["--inspect=0.0.0.0:9000"],
     "out_file": "./logs/app.log",
     "error_file": "./logs/app.log",
     "merge_logs": true,
@@ -24,6 +25,7 @@
       "NODE_ENV": "production",
       "PORT": "3101"
     },
+    "node_args": ["--inspect=0.0.0.0:9001"],
     "out_file": "./logs/app.log",
     "error_file": "./logs/app.log",
     "merge_logs": true,
