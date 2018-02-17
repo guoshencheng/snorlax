@@ -9,6 +9,10 @@
       "NODE_ENV": "production",
       "PORT": "3100"
     },
+    "env_test": {
+      "NODE_ENV": "production",
+      "PORT": "3101"
+    },
     "out_file": "./logs/app.log",
     "error_file": "./logs/app.log",
     "merge_logs": true,
