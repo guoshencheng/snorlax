@@ -28,7 +28,7 @@ const findById = async (req, res, next) => {
 
 const all = async (req, res, next) => {
   try {
-   const posts = await db.Post.all({ order: [["updated_at", "DESC"]]})
+   const posts = await db.Post.all({ order: [["id", "DESC"]]})
    res.makeJson(posts.map(post => post.toJSON()))
   } catch (e) {
     next(e)
