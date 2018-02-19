@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'gsc_post',
     getterMethods: {
       statusDesc() {
-        return postStatusDesc[this.status || 1];
+        return postStatusDesc[this.status];
       }
     },
   });
