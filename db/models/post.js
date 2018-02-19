@@ -1,3 +1,5 @@
+var { postStatusDesc } = require('../../constants/databaseRowComments');
+
 module.exports = (sequelize, DataTypes) => {
   var Post = sequelize.define("Post", {
     id: {
@@ -28,6 +30,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     tableName: 'gsc_post',
+    getterMethods: {
+      statusDesc() {
+        return postStatusDesc[this.status || 1];
+      }
+    },
   });
   return Post;
 };
