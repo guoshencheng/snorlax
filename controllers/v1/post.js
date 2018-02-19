@@ -65,13 +65,14 @@ const update = async (req, res, next) => {
   const id = req.params.id;
   const body = req.body;
   const { markdown, html, title, short, status } = body;
+  const attributes = Object.keys(db.Post.attributes);
   try {
     let post = await db.Post.findById(id)
-    post.markdown = markdown;
-    post.html = html;
-    post.title = title;
-    post.short = short;
-    post.status = status;
+    attributes.forEach((key) => {
+      if (body[key]) {
+        post[key] = body[key];
+      }
+    })
     post = await post.save();
     res.makeJson(post.toJSON());
   } catch (e) {
