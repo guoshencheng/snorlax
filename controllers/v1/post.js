@@ -46,7 +46,7 @@ const createEmpty = async (req, res, next) => {
 
 const changeStatus = async (req, res, next) => {
   const id = req.params.id;
-  const state = req.params.status;
+  const status = req.params.status;
   try {
     var post = await db.Post.findById(id);
     if (!post) {
