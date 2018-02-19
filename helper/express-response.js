@@ -5,7 +5,7 @@ response.makeJson = function(obj, code) {
     this.json({
       success: false,
       code: 500,
-      errDesc: obj.message
+      message: obj.message
     })
   } else {
     this.json({
