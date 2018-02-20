@@ -103,6 +103,28 @@ const findByCategory = async (req, res, next) => {
   }
 }
 
+const linkPostAndCategory = async (req, res, next) => {
+  const id = req.params.id;
+  const categoryId = req.params.categoryId;
+  try {
+    var post = await db.Post.findById(id);
+    if (!post) {
+      throw new Error(`post id ${id} not found`)
+      return;
+    }
+    var postCategory = await db.PostCategory.findById(categoryId);
+    if (!postCategory) {
+      throw new Error(`post category id ${categoryId} not found`)
+      return;
+    }
+    var postCategoryMap = await db.PostCategoryMap.findOne({ postId: id, postCategoryId: categoryId });
+    postCategoryMap = postCategoryMap || await db.PostCategoryMap.create({ postId: id, postCategoryId: categoryId })
+    res.makeJson(postCategoryMap);
+  } catch (e) {
+    next(e)
+  }
+}
+
 module.exports = {
-  findByCategory, all, createEmpty, update, findById, changeStatus, allOnline
+  findByCategory, all, createEmpty, update, findById, changeStatus, allOnline, linkPostAndCategory
 };
