@@ -95,7 +95,7 @@ const findByCategory = async (req, res, next) => {
       attributes: ['id', 'short', 'title', 'status']
     })
     const result = {
-      postTag, posts: posts.map(post => post.toJSON())
+      postCategory, posts: posts.map(post => post.toJSON())
     }
     res.makeJson(result);
   } catch (e) {
