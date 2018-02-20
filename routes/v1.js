@@ -4,7 +4,9 @@ var router = new Router();
 var controllers = require('../controllers/index');
 
 router.get('/posts/categories', controllers.v1.postCategory.all);
+router.post('/posts/categories', controllers.v1.postCategory.create);
 router.get('/posts/categories/:id', controllers.v1.postCategory.findById);
+router.put('/posts/categories/:id', controllers.v1.postCategory.update);
 
 router.get('/posts/categories/:id/posts', controllers.v1.post.findByCategory);
 router.put('/posts/:id', controllers.v1.post.update);
