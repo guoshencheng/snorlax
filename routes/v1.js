@@ -3,10 +3,10 @@ var Router = express.Router;
 var router = new Router();
 var controllers = require('../controllers/index');
 
-router.get('/posts/tags', controllers.v1.postTag.all);
-router.get('/posts/tags/:id', controllers.v1.postTag.findById);
+router.get('/posts/categories', controllers.v1.postCategory.all);
+router.get('/posts/categories/:id', controllers.v1.postCategory.findById);
 
-router.get('/posts/tags/:id/posts', controllers.v1.post.findByTag);
+router.get('/posts/categories/:id/posts', controllers.v1.post.findByCategory);
 router.put('/posts/:id', controllers.v1.post.update);
 router.put('/posts/:id/status/:status', controllers.v1.post.changeStatus);
 router.get('/posts', controllers.v1.post.all);

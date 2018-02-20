@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  var PostTag = sequelize.define("PostTag", {
+  var PostCategory = sequelize.define("PostCategory", {
     id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: ''
     }
   }, {
-    tableName: 'gsc_post_tag',
+    tableName: 'gsc_post_category',
   });
-  return PostTag;
+  return PostCategory;
 };

@@ -2,8 +2,8 @@ var db = require('../../db/index');
 
 const all = async (req, res, next) => {
   try {
-    const postTags = await db.PostTag.findAll();
-    res.makeJson(postTags.map(doc => doc.toJSON()));
+    const postCategories = await db.PostCategory.findAll();
+    res.makeJson(postCategories.map(doc => doc.toJSON()));
   } catch (e) {
     next(e);
   }
@@ -12,8 +12,8 @@ const all = async (req, res, next) => {
 const findById = async (req, res, next) => {
   const id = req.params.id;
   try {
-    const postTag = await db.PostTag.findById(id);
-    res.makeJson(postTag.toJSON());
+    const postCategory = await db.PostCategory.findById(id);
+    res.makeJson(postCategory.toJSON());
   } catch (e) {
     next(e)
   }

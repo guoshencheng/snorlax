@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  var PostTagMap = sequelize.define("PostTagMap", {
+  var PostCategoryMap = sequelize.define("PostCategoryMap", {
     id: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
@@ -14,10 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     postTagId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
-      field: 'post_tag_id'
+      field: 'post_category_id'
     }
   }, {
-    tableName: 'gsc_post_tag_map',
+    tableName: 'gsc_post_category_map',
   });
-  return PostTagMap;
+  return PostCategoryMap;
 };

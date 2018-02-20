@@ -80,12 +80,12 @@ const update = async (req, res, next) => {
   }
 }
 
-const findByTag = async (req, res, next) => {
+const findByCategory = async (req, res, next) => {
   const id = req.params.id;
   try {
-    var postTag = await db.PostTag.findById(id);
-    var postTagMaps = await db.PostTagMap.findAll({ where: { postTagId: id } });
-    var postIds = postTagMaps.map(postTagMap => postTagMap.postId);
+    var postCategory = await db.PostCategory.findById(id);
+    var postCategoryMaps = await db.PostCategoryMap.findAll({ where: { postCategoryId: id } });
+    var postIds = postCategoryMaps.map(postCategoryMap => postCategoryMap.postId);
     var posts  = await db.Post.findAll({
       where: {
         id: {
@@ -104,5 +104,5 @@ const findByTag = async (req, res, next) => {
 }
 
 module.exports = {
-  findByTag, all, createEmpty, update, findById, changeStatus, allOnline
+  findByCategory, all, createEmpty, update, findById, changeStatus, allOnline
 };

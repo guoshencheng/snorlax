@@ -1,7 +1,7 @@
 var tip = require('./tip')
-var postTag = require('./postTag');
+var postCategory = require('./postCategory');
 var post = require('./post');
 
 module.exports = {
-  tip, postTag, post
+  tip, postCategory, post
 };
