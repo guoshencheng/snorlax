@@ -23,7 +23,7 @@ const create = async (req, res, next) => {
   const body = req.body;
   const attributes = Object.keys(db.PostCategory.attributes);
   const params = {};
-  Object.keys(params).forEach(key => {
+  Object.keys(body).forEach(key => {
     if (body[key]) {
       params[key] = body[key]
     }
@@ -46,7 +46,7 @@ const update = async (req, res, next) => {
       throw new Error(`post category id ${id} not found`);
       return;
     }
-    Object.keys(params).forEach(key => {
+    Object.keys(body).forEach(key => {
       if (body[key]) {
         postCategory[key] = body[key]
       }
