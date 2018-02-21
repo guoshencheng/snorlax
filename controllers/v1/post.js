@@ -2,6 +2,41 @@ var db = require('../../db/index');
 var Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
+const linkPostCateByPosts = async (posts = []) => {
+  try {
+    const postIds = posts.map(post => post.id);
+    const postCategoryMaps = await db.PostCategoryMap.findAll({
+      where: {
+        id: {
+          [Op.in]: [postIds]
+        }
+      }
+    });
+    const postCategoryIds = postCategoryMaps.map(postCategoryMap => postCategoryMap.postCategoryId);
+    const postCategoryList = postCategoryIds && postCategoryIds.length > 0 ? await db.PostCategory.findAll({
+      where: {
+        id: {
+          [Op.in]: [postCategoryIds]
+        }
+      }
+    }) : [];
+    return posts.map(post => {
+      const postCategoryMap = postCategoryMaps.filter(postCategoryMap => postCategoryMap.postId == post.id)[0];
+      if (!postCategoryMap) {
+        return post;
+      }
+      const postCategory = postCategoryList.filter(postCategory => postCategory.id == postCategoryMap.postCategoryId)[0];
+      if (!postCategory) {
+        return post
+      }
+      return Object.assign({}, post, { postCategory })
+    })
+  } catch (e) {
+    console.log(e);
+    return posts;
+  }
+}
+
 const allOnline =  async (req, res, next) => {
   try {
     const posts = await db.Post.findAll({
@@ -10,7 +45,8 @@ const allOnline =  async (req, res, next) => {
       },
       order: [["created_at", "DESC"]]
     });
-    res.makeJson(posts.map(p => p.toJSON()));
+    const params = await linkPostCateByPosts(posts.map(p => p.toJSON()));
+    res.makeJson(params);
   } catch (e) {
     next(e)
   }
@@ -34,8 +70,9 @@ const findById = async (req, res, next) => {
 
 const all = async (req, res, next) => {
   try {
-   const posts = await db.Post.all({ order: [["id", "asc"]]})
-   res.makeJson(posts.map(post => post.toJSON()))
+    const posts = await db.Post.all({ order: [["id", "asc"]]})
+    const params = await linkPostCateByPosts(posts.map(p => p.toJSON()));
+    res.makeJson(params)
   } catch (e) {
     next(e)
   }
@@ -92,17 +129,17 @@ const findByCategory = async (req, res, next) => {
     var postCategory = await db.PostCategory.findById(id);
     var postCategoryMaps = await db.PostCategoryMap.findAll({ where: { postCategoryId: id } });
     var postIds = postCategoryMaps.map(postCategoryMap => postCategoryMap.postId);
-    var posts  = await db.Post.findAll({
+    var posts = postIds && postIds.length > 0 ? await db.Post.findAll({
       where: {
         id: {
           [Op.in]: [postIds]
         }
       },
       attributes: ['id', 'short', 'title', 'status']
-    })
-    const result = {
-      postCategory, posts: posts.map(post => post.toJSON())
-    }
+    }) : [];
+    const result = posts.map(post => Object.assign({}, post.toJSON(), {
+      postCategory
+    }))
     res.makeJson(result);
   } catch (e) {
     next(e);

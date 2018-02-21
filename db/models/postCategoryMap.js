@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       field: 'post_id'
     },
-    postTagId: {
+    postCategoryId: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       field: 'post_category_id'

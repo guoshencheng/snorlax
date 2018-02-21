@@ -8,7 +8,7 @@ router.post('/posts/categories', controllers.v1.postCategory.create);
 router.get('/posts/categories/:id', controllers.v1.postCategory.findById);
 router.put('/posts/categories/:id', controllers.v1.postCategory.update);
 
-router.get('/posts/categories/:id', controllers.v1.post.findByCategory);
+router.get('/categories/:id/posts', controllers.v1.post.findByCategory);
 router.post('/posts/:id/categories/:categoryId', controllers.v1.post.linkPostAndCategory);
 router.put('/posts/:id', controllers.v1.post.update);
 router.put('/posts/:id/status/:status', controllers.v1.post.changeStatus);
