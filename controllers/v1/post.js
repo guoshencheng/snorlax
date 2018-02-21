@@ -20,7 +20,13 @@ const findById = async (req, res, next) => {
   const id = req.params.id;
   try {
     const post = await db.Post.findById(id);
-    res.makeJson(post.toJSON());
+    const postCategoryMap = await db.PostCategoryMap.findOne({ postId: id })
+    var postCategory;
+    if (postCategoryMap) {
+      postCategory = await db.PostCategory.findById(postCategoryMap.postCategoryId);
+    }
+    const params = Object.assign({}, post.toJSON(), { postCategory })
+    res.makeJson(params);
   } catch (e) {
     next(e)
   }
