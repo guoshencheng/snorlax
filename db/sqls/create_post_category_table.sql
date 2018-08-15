@@ -1,8 +1,0 @@
-CREATE TABLE IF NOT EXISTS `gsc_post_category` (
-  `id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `name` VARCHAR(200) NOT NULL COMMENT '类别的名称',
-  `description` VARCHAR(400) DEFAULT '' COMMENT '类别的描述',
-  `created_at` DATETIME COMMENT '创建时间',
-  `updated_at` DATETIME COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=INNODB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
