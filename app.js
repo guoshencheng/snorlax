@@ -1,9 +1,7 @@
 const Koa = require('koa');
 const app = new Koa();
+const router = require('./router');
 
-// 响应
-app.use(ctx => {
-  ctx.body = 'Hello Koa';
-});
+app.use(router.routes()).use(router.allowedMethods());
 
 module.exports = app;
