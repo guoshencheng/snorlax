@@ -1,15 +1,18 @@
 const Koa = require('koa');
+const router = require('./routes');
+
 const app = new Koa();
 
-const { ApolloServer, gql } = require('apollo-server-koa');
-const schema = require('./GraphqlSchema');
+app.use(async (ctx, next) => {
+  const result = await next();
+  console.log(result);
+  ctx.body = {
+    data: result,
+  };
+})
 
-const server = new ApolloServer({ schema });
-
-server.applyMiddleware({ app });
-
-app.listen({ port: 4000 }, () =>
-  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`),
-);
+app
+  .use(router.routes())
+  .use(router.allowedMethods());
 
 module.exports = app;
