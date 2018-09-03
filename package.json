@@ -6,6 +6,9 @@
     "install:submodules": "git submodule foreach 'echo $path `git pull origin master`'",
     "start": "nodemon ./bin/www --config ./nodemon.json"
   },
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "dependencies": {
     "config": "^2.0.1",
     "koa": "^2.5.2",

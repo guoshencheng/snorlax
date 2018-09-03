@@ -5,7 +5,6 @@ const app = new Koa();
 
 app.use(async (ctx, next) => {
   const result = await next();
-  console.log(result);
   ctx.body = {
     data: result,
   };
